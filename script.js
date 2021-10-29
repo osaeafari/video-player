@@ -11,7 +11,7 @@ const duration = document.querySelector('.time-duration');
 const fullscreenBtn = document.querySelector('.fullscreen');
 
 
-// Play & Pause ----------------------------------- //
+// ----------------------------- Play & Pause ----------------------------------- //
 function showPlayIcon(){
     playBtn.classList.replace('fa-pause', 'fa-play');
         playBtn.setAttribute('title', 'Play');
@@ -31,7 +31,7 @@ function togglePlay(){
 //On video en, show play button icon
 video.addEventListener('ended', showPlayIcon);
 
-// Progress Bar ---------------------------------- //
+// --------------------------  Progress Bar ---------------------------------- //
 
 //Calculate display time format
 function displayTime(time) {
@@ -56,15 +56,35 @@ function setProgress(e){
     console.log(newTime);
 }
 
-// Volume Controls --------------------------- //
+// ---------------------------- Volume Controls --------------------------- //
+function changeVolume(e) {
+    let volume = e.offsetX / volumeRange.offsetWidth;
+    //rounding volume up or down
+    if (volume < 0.1){
+        volume = 0
+    }
+    if (volume > 0.9){
+        volume = 1;
+    }
+    volumeBar.style.width = `${volume * 100}%`;
+    video.volume = volume;
+    // change icon dependng on volume
+    volumeIcon.className = '';
+    if (volume > 0.7){
+        volumeIcon.classList.add('fas', 'fa-volume-up');
+    } else if ( volume < 0.7 && volume > 0) {
+        volumeIcon.classList.add('fas', 'fa-volume-down');
+    } else if ( volume === 0) {
+        volumeIcon.classList.add('fas', 'fa-volume-off');
+    }
+}
+
+
+//---------------------------- Change Playback Speed -------------------- //
 
 
 
-// Change Playback Speed -------------------- //
-
-
-
-// Fullscreen ------------------------------- //
+// ----------------------------- Fullscreen ------------------------------- //
 
 
 //Event Listeners
@@ -73,3 +93,4 @@ video.addEventListener('click', togglePlay);
 video.addEventListener('timeupdate', updateProgress);
 video.addEventListener('canplay', updateProgress);
 progressRange.addEventListener('click', setProgress);
+volumeRange.addEventListener('click', changeVolume);
