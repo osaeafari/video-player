@@ -35,7 +35,8 @@ body {
 
 video {
   border-radius: 5px;
-
+  width: 100%;
+  height: auto;
 }
 
 /* Containers */
@@ -62,7 +63,6 @@ video {
   justify-content: space-between;
 
 }
-
 
 
 .control-group {
@@ -92,7 +92,6 @@ video {
   cursor: pointer;
 
 }
-
 
 
 .progress-bar {
@@ -208,6 +207,10 @@ select > option {
 /* Media Query: Large Smartphone (Vertical) */
 @media screen and (max-width: 600px) {
 
+  .player{
+    min-width: 0;
+    max-width: 95vw;
+  }
 
   .fas {
     font-size: 20px;
@@ -257,7 +260,6 @@ select > option {
 @media screen and (max-width: 900px) and (max-height: 500px) {
   .player {
     max-height: 95vh;
-    max-width: auto;
   }
 
   video {
@@ -270,3 +272,4 @@ select > option {
     border-radius: 0;
   }
 }
+ 
